@@ -1,0 +1,25 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model SensorData {
+  id          Int      @id @default(autoincrement())
+  temperature Float
+  humidity    Float
+  pressure    Float
+  timestamp   DateTime @default(now())
+}
+
+model Intervention {
+  id          String   @id @default(uuid())
+  type        String   // critical, maintenance, routine
+  status      String   // pending, in-progress, completed
+  description String
+  assignedTo  String
+  timestamp   DateTime @default(now())
+}
